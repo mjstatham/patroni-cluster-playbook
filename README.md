@@ -89,13 +89,13 @@ cd ./scripts/pg
 cd ../../
 vim inventory
 ```
-3. Run playbooks to install and configure PostgreSQL and Patroni on the `base-image`. Version of PostgreSQL can be customised by updated the `pgversion` variable in `pg-playbook.yml` file.
+3. Run playbooks to install and configure PostgreSQL and Patroni on the `base-image`. Version of PostgreSQL can be customised by updated the `pgversion` variable in `pg-playbook.yml` file. Nginx is used to rewrite requests for replica lag from path based to query based because GCP health checks don't support query strings. Optionally you can install pgbouncer on the base image as well to handle connection pooling locally.
 ```bash
 ansible-playbook bootstrap-python.yml
 ansible-playbook pg-playbook.yml
 ansible-playbook patroni-playbook.yml
-ansible-playbook pgbouncer-playbook.yml
 ansible-playbook nginx-playbook.yml
+ansible-playbook pgbouncer-playbook.yml
 ```
 4. Create the pg-img base image
 ```bash
