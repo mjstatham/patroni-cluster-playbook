@@ -1,4 +1,4 @@
-- hosts: pg-img
+- hosts: base-image
   become: yes
 
   tasks:
